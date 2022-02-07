@@ -1,0 +1,349 @@
+#R
+
+# R버전 변경시는 반드시 제거 후 
+# 프로그램 설치된 폴더에서 잔여폴더 제거 후 R 다른버전으로 설치
+
+# R설치 후 R스튜디오 설치해야함
+# R은 인터페이스가 별로, 메모리 사용량이 R스튜디오보다 작음.
+
+# R 새 스크립트 창_단축키 ctrl+shift+n
+
+# R은 문자를 정확히 구분 
+
+-------------------------------------------------------------
+
+# '>' 준비상태가 되었다 
+
+# R의 list 형식은 a=c(2,3,4,3)/ a=[2,3,4,3] (x) 
+# 빈 list 형식 = a=c( )
+
+# 두개이상의 자료를 갖는 리스트 구조에서 
+# 파이썬에서는 직업명 = [' ',' '], 파이썬에서는 초기화 => 직업명 =[ ] 
+# R에서는 직업명= c(' ',' '),R에서는 리스트 초기화 => 직업명=c( )
+-------------------------------------------------------------
+
+3 - 4 
+
+3-
+4
+
+# a <- 2 (a에게 2를 넘겨줘!) = a=2 
+
+a=2
+b=3
+a<-2
+a
+
+#R 리스트형식 아님 
+a = [2,3,4,3] 
+
+a = c(2,3,4,5)
+length(a)
+
+a[1]
+
+#[2:] 이러한 형식 불가 
+a[2:]
+
+#str: 데이터구조,변수의개수,변수명
+str(a)
+
+# table(a) => count 함
+table(a)
+
+# plot(a) => plot창이 나옴 
+plot(a)
+plot(table(a))
+plot(a)
+
+"plot(table(a)
+plot"
+
+
+plot(a)
+plot(table(a))
+
+#boxplot(a) =>boxplot
+boxplot(a)
+
+3+4
+
+#행열 구성을 확인한다
+dim(a)
+
+NULL
+
+#뷰어창에서 데이터를 확인한다
+View(a)
+------------------------------------------------------------------ 
+직업명=c('데이터과학자','엔지니어','엔지니어','세금관리자','분석관리자')
+채용수=c(4184,2725,2599,3317,1958)
+평균급여=c(110,110,106,110,112)
+직업만족도=c(4.4,4.0,4.3,4.0,4.1)
+직업명
+
+str(직업명)
+#summary
+#수치형데이터에 대해서는 최솟값Min, 1사분위수1st Qu, 중앙값Median, 평균Mean, 3사분위수3rd Qu, 최댓값Max을 보여준다. 
+# 
+categorical/factor 데이터의 경우, 각각의 개수 출력
+table - categorial/factor variable에 대해 각각의 빈도수를 표 형태로 출력
+str - 데이터의 구조적 형태(Length, class, mode )를 요약하여 출력
+
+summary(직업명) 
+summary(평균급여)
+plot(평균급여)
+
+plot(직업명)#error 도출(문자집계왜해?)
+
+
+# factor = 명목형 변수 
+# 1차원 자료: 벡터,리스트,팩터 (단일주제에 대한 값을 모아놓음) 
+# 2차원 자료: 매트릭스, 데이터프레임  (4개와 같은 주제에대한 값을 모아놓음)
+
+# LEVELS 문자열의 중복을 제거한 특별한값
+# levels의 순서는 변경 가능 
+# factor함수 입력 시 levels 함께도출
+
+직업명fa=as.factor(직업명) 
+직업명fa
+
+직업명 
+  
+summary(직업명fa)
+plot(직업명fa)
+data=data.frame(직업명,채용수,평균급여,직업만족도)
+data
+
+str(data) #num = 숫자 chr =문자 
+
+plot(data)
+
+data$직업명 #data의 직업명은 무엇인가?
+----------------------------------------------
+
+R에서는 명목형변수의 factor가 있음.
+자료형 확인은 str(변수명)으로 확인가능. (=structure)
+factor는 자료split안되지만(글자나누기불가), 유니크한 레벨을 갖고있음.
+=>plot(변수)했을 때 count집계가 가능함
+문자자료를 factor로 변경하는 방법은 as.factor(변수)임
+
+------------------------------------------------
+# strsplit(변수, 글자를 나눌 기준)
+a = 'python/r/cobol/r'
+a=c('python/r/cobol/r','aa/bre/ebe/cec')
+tmp = strsplit(a,"/")
+tmp
+tmp[[1]][2] 
+summary(tmp)
+plot(a) #오류
+
+
+#unlist - R에서 리스트를 unlist로 변경하는 방법 
+a=c('파이썬,빅데이터분석가,인공지능','R,데이터분석가,빅데이터분석')
+tmp=strsplit(a,",")
+tmp
+summary(tmp)
+plot(a) #에러
+tmp1=unlist(tmp)
+tmp2=as.factor(tmp1)
+summary(tmp2)
+plot(tmp2) 
+strsplit(as.character(tmp2),'-')
+unlist(strsplit(as.character(tmp2),'-'))
+
+
+#factor형은 strsplit 안됨
+b = as.factor(a)
+strsplit(b,"/") #에러
+plot(b)
+--------------------------------------------------------------------------------------------------
+예측분석 할 경우 숫자로 변경해야하는데, 이것을 굳이 숫자로 변경해야하나? 
+
+팩터 = 명목형변수
+-----------------------------------------------------
+list = 성격이 다른 것도 조합가능/ name을 갖고있음 
+행렬 = 성격이 비슷한 것끼리 조합 
+
+r은 들여쓰기 없음
+
+---------------------------------------------------------
+정리
+
+R에는 많은 내장 데이터를 제공
+자동차 연비와 관련된 mtcars
+
+read없는 자료는 '내장자료'
+
+---------------------------------------------------------
+
+cafe = list(espresso = c(4,5,3,6,5,4,7),
+	      americano = c(63,68,64,68,72,89,94),
+	      latte = c(61,70,59,71,71,92,88),
+	      price = c(2.0,2.5,3.0),
+	      menu = c('espresso','americano','latte'))
+cafe
+str(cafe)
+summary(cafe)
+
+#dataframe
+
+cafe$menu = factor(cafe$menu)
+str(cafe)
+
+cafe$price
+
+names(cafe$price) = cafe$menu
+cafe$price
+
+names(cafe$price)
+str(cafe)
+
+str(cafe$price) 
+cafe$price[1]
+
+#mtcars
+
+mtcars   #read없는 자료는 내장자료 
+
+head(mtcars)
+head(mtcars,3) #위에서부터 3줄까지 확인해보자!
+
+str(mtcars)
+
+summary(mtcars)
+plot(mtcars$vs) #mtcars의 vs값 
+plot(mtcars$cyl)
+mtcars
+
+#cyl의 개수를 확인해보자
+summary(factor(mtcars$cyl))
+
+#동일명령
+names(summary(factor(mtcars$cyl)))
+levels(factor(mtcars$cyl))
+unique(mtcars$cyl)  #unique= 맨위값부터 중복제거하면서 내려움 
+
+
+#맨윗값 변경 
+tmp = summary(factor(mtcars$cyl))
+tmp
+names(tmp) = c('aaa','b','c')
+tmp
+
+#names는 무조건 한줄, 그줄 밑부분은 여러줄 나올수 있음
+names(tmp) = c('cyl:4','cyl:6','cyl:8') 
+str(tmp)
+tmp[1]
+
+tmp[[1]]#제목 사라짐 
+
+###리스트작업 (리스트특:자료의길이가 달라도됨)
+tmp=split(mtcars,mtcars$cyl)
+str(tmp)
+
+tmp[[1]]
+split(tmp[[1]],tmp[[1]]$am)
+-------------------------------------------------------------
+-------------------------------------------------------------
+# 166p
+# city,rank = 필드,변수,item
+
+iris
+iris[,c(1:2)]
+iris[,c(1,3,5)]
+iris[,c("Sepal.Length","Species")]
+iris[1:5,] #1~5행의 모든데이터
+iris[1:5,c(1,3)] #1~5행의 데이터 중 1,3열의 데이터
+--------------------------------------------------------------
+작업물
+
+1. 작업자료 다운로드
+2. R에서 csv로 읽기
+   df=read.csv('경로csv')
+3. 구조파악 => str(df): 타입,행,열의 갯수
+4. 데이터 샘플을 확인 => head(df,10)
+5. 데이터의 기본 기술 통계 =>summary(df)
+6. 빈도수계산 => summary(factor(df[,1]
+-----------------------------------------------------------
+작업물 실행순서
+콘솔창에 커서를 두고 
+파일-작업디렉토리변경 
+dir()
+df = read.csv("부산광역시_현대미술관 관람객 수_20201231.csv")
+str(df)
+head(df)#head는 6행까지 출력
+names(df)
+df$연도
+names(df)[1]
+summary(df)
+
+str(df)
+# 자료에 연도만 출력 아래 2개는 같은 내용.
+df$연도
+df[,1]
+
+# [미션] 연도와 관람객수만 출력
+str(df)
+df[,c(1,3)]
+
+# [미션] 위로 12개의 자료만 출력. 즉 2018년도 자료가 됨
+str(df)
+df[1:12,]
+
+# [미션] 아래로 12개의 자료만 출력. 즉 2020년도 자료가 됨.
+str(df)
+df[25:36,]
+
+# [미션] 2018년도 월과 관람객수만 출력
+str(df)
+df[,c(2,3)]
+df[1:12,c(2,3)]
+
+
+# 구글링. R에서 NA(결측차)값을 0으로
+
+is.na(df) # na의 존재유무 T/F확인 가능
+is.na(df[3])
+summary(is.na(df[3])) # T/F를 확인해서 정리.
+str(is.na(df[3]))
+table(is.na(df))
+plot(table(is.na(df)))
+barplot(table(is.na(df[1]))) 
+barplot(table(is.na(df[2]))) 
+barplot(table(is.na(df[3]))) 
+
+par(mfrow = c(1,3)) #행 열
+
+index=1
+barplot(table(is.na(df[index])),main=names(df)[index])
+index=2
+barplot(table(is.na(df[index])),main=names(df)[index])
+index=3 
+barplot(table(is.na(df[index])),main=names(df)[index])
+
+
+#na값을 10으로 지정(0이든 다른것도 상관없음)
+df[is.na(df)]=10
+#확인방법
+summary(df)
+
+#각 연도의 자료가 12개인지 확인하는 3가지방법 
+summary(factor(df$연도)) 
+table(df$연도)
+barplot(table(df$연도))
+-------------------------------------------------------------------------------------------------------
+
+1.csv자료를 읽기위해 작업경로를 세팅
+2.df=read.csv명령어로 자료 읽음(별도옵션 없었기 때문에, 가장 상단은 제목, 문자는 factor로읽음)
+3.데이터셋 샘플 확인
+4.데이터의 구조를 확인(필드명,성격 확인)
+5.기술통계를 통해 데이터셋의 분포를 확인 
+   summary(df),summary(df[,c(1,3)])등 일부 데이터만 확인가능
+6.NA값을 반드시 확인(summary확인,is.na(df),table(is.na(df)),barplot(table...))
+7.참고:시각화도 가능
+8.NA값 처리(0으로 대체, 중앙값이나 평균값으로 대체, 0있는 행을 모두제거, 임의값으로 대체)
+9.2018년도 자료가 12개,2019 12개,2020년 12개 
+  summary(factor(df$연도)) 또는 table(df$연도) 또는 barplot(table(df$연도))
+10.1월,2월,3월~12월 달 자료가 각 3개씩 나오는지 확인 
+---------------------------------------------------------------------------------------------------------
